@@ -18,9 +18,13 @@
 
     char* states;
     int detecting_states = 0;
+    int detecting_finals = 0;
+    int detecting_initial = 0;
 
     llist *alphabet;
     llist *transitions;
+    llist *final_states;
+    char * initial_state;
 
 %}
 
@@ -37,28 +41,34 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
 "%".*\n         { printf("Found a comment\n"); }
 
 "Alfabeto"      { printf("Found an Alphabet declaration\n"); }
-"Estados"       { detecting_states = 1; printf("Found a declaration of States\n"); }
+"Estados"       { printf("Found a declaration of States\n"); detecting_states = 1; }
 "Transiciones"  { printf("Found a declaration of Transitions\n"); }
-"Inicial"       { printf("Found a declaration of Initial\n"); }
-"Finales"       { printf("Found a declaration of Finals\n"); }
+"Inicial"       { printf("Found a declaration of Initial\n"); detecting_initial = 1;}
+"Finales"       { printf("Found a declaration of Finals\n"); detecting_finals = 1;}
 
 {transition}    { printf("Found a transition\n"); llist_push(transitions, strdup(yytext));}
 {split}         { printf("Found a separator\n"); }
-{number}        { if (detecting_states == 1)
+{number}        { if (detecting_states)
                   {
                     states = strdup(yytext);
                     detecting_states = 0;
-                    printf("Found a number of states\n");
                   }
-                  else
+                  else if (detecting_initial)
                   {
-                    printf("Found a number\n");
+                    initial_state = strdup(yytext);
+                    detecting_states = 0;
+                  }
+                  else if (detecting_finals)
+                  {
+                    llist_push(final_states, strdup(yytext));
                   }
                 }
 
 {SIMBOLO}       { printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));}
 {ABRIR}         { printf("Found token 'ABRIR'\n"); }
-{CERRAR}        { printf("Found token 'CERRAR'\n"); }
+{CERRAR}        { printf("Found token 'CERRAR'\n");
+                  if (detecting_finals == 1) detecting_finals = 0;
+                }
 {COMA}          { printf("Found token 'COMA'\n"); }
 
 .               { printf("<<error:%s>>\n", yytext); }
@@ -79,6 +89,7 @@ int main(int argc, char const *argv[])
 
     alphabet = llist_create(NULL);
     transitions = llist_create(NULL);
+    final_states = llist_create(NULL);
 
     yylex();
     printf("\n=======================================\nLexical recognition finished\n\nNumber of states = %s\
@@ -86,9 +97,13 @@ int main(int argc, char const *argv[])
     llist_print(transitions, printf);
     printf("\nAlphabet:\n\n");
     llist_print(alphabet, printf);
+    printf("\nInitial state = %s\n\n", initial_state);
+    printf("\nFinal states:\n\n");
+    llist_print(final_states, printf);
     printf("=======================================\n");
 
 
     llist_free(alphabet);
     llist_free(transitions);
+    llist_free(final_states);
 }
