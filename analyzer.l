@@ -44,12 +44,14 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
 
 {transition}    { printf("Found a transition\n"); llist_push(transitions, strdup(yytext));}
 {split}         { printf("Found a separator\n"); }
-{number}        { if (detecting_states == 1) {
+{number}        { if (detecting_states == 1)
+                  {
                     states = strdup(yytext);
                     detecting_states = 0;
                     printf("Found a number of states\n");
                   }
-                  else {
+                  else
+                  {
                     printf("Found a number\n");
                   }
                 }
