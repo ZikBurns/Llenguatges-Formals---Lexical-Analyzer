@@ -1,4 +1,4 @@
-*.c
+lex.yy.c
 *.out
 *.exe
 *.swp

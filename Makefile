@@ -1,3 +1,4 @@
 a.exe:
 	flex analyzer.l
-	gcc lex.yy.c -lfl
+	gcc -c -o llist.o llist.c
+	gcc lex.yy.c llist.o -lfl
