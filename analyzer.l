@@ -62,6 +62,10 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
                   {
                     llist_push(final_states, strdup(yytext));
                   }
+				  else if ((*(strdup(yytext))>='0')&&(*(strdup(yytext))<='9'))
+				  {
+					printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));
+				  }
                 }
 
 {SIMBOLO}       { printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));}
