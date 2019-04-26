@@ -56,7 +56,7 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
                   else if (detecting_initial)
                   {
                     initial_state = strdup(yytext);
-                    detecting_states = 0;
+                    detecting_initial = 0;
                   }
                   else if (detecting_finals)
                   {
