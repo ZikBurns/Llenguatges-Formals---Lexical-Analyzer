@@ -34,43 +34,6 @@ void llist_free(llist *list)
     free(list);
 }
 
-// Returns 0 on failure
-int llist_add_inorder(void *data, llist *list,
-                       int (*comp)(void *, void *))
-{
-    struct node *new_node;
-    struct node *curr;
-    struct node *prev = NULL;
-
-    if (list == NULL || *list == NULL) {
-        fprintf(stderr, "llist_add_inorder: list is null\n");
-        return 0;
-    }
-
-    curr = *list;
-    if (curr->data == NULL) {
-        curr->data = data;
-        return 1;
-    }
-
-    new_node = (struct node *)malloc(sizeof (struct node));
-    new_node->data = data;
-
-    // Find spot in linked list to insert new node
-    while (curr != NULL && curr->data != NULL && comp(curr->data, data) < 0) {
-        prev = curr;
-        curr = curr->next;
-    }
-    new_node->next = curr;
-
-    if (prev == NULL)
-        *list = new_node;
-    else
-        prev->next = new_node;
-
-    return 1;
-}
-
 void llist_push(llist *list, void *data)
 {
     struct node *head;
@@ -92,22 +55,6 @@ void llist_push(llist *list, void *data)
         new_node->next = head;
         *list = new_node;
     }
-}
-
-void *llist_pop(llist *list)
-{
-    void *popped_data;
-    struct node *head = *list;
-
-    if (list == NULL || head->data == NULL)
-        return NULL;
-
-    popped_data = head->data;
-    *list = head->next;
-
-    free(head);
-
-    return popped_data;
 }
 
 void llist_print(llist *list)
