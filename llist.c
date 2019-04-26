@@ -110,11 +110,11 @@ void *llist_pop(llist *list)
     return popped_data;
 }
 
-void llist_print(llist *list, void (*print)(void *))
+void llist_print(llist *list)
 {
     struct node *curr = *list;
     while (curr != NULL) {
-        print(curr->data);
+        printf(curr->data);
         printf("\n");
         curr = curr->next;
     }
