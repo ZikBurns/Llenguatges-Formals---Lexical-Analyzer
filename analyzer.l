@@ -97,12 +97,13 @@ int main(int argc, char const *argv[])
 
     yylex();
     printf("\n================================================================================\
-    \nLexical recognition finished\n\nNumber of states = %s\
-    \n\nTransitions:\n\n", states);
-    llist_print(transitions);
-    printf("\nAlphabet:\n\n");
+    \nLexical recognition finished\n\n");
+    printf("Alphabet:\n\n");
     llist_print(alphabet);
-    printf("\nInitial state = %s\n\n", initial_state);
+    printf("\n\nNumber of states = %s", states);
+    printf("\n\n\nTransitions:\n\n");
+    llist_print(transitions);
+    printf("\n\nInitial state = %s\n\n", initial_state);
     printf("\nFinal states:\n\n");
     llist_print(final_states);
     printf("================================================================================\n");
