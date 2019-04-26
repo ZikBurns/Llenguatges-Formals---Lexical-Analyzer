@@ -1,11 +1,11 @@
 /**
 * Task 1: Lexical analyser
 * Authors:
-*	Josep Calero Santo
-*	Pablo Gimeno Sarroca
-*	Hatim Kaddouch
+*	  Josep Calero Santo
+*	  Pablo Gimeno Sarroca
+*	  Hatim Kaddouch
 * Date:
-*	28/04/2019
+*	  28/04/2019
 * Version 1.0
 **/
 
@@ -41,13 +41,23 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
 "%".*\n         { printf("Found a comment\n"); }
 
 "Alfabeto"      { printf("Found an Alphabet declaration\n"); }
-"Estados"       { printf("Found a declaration of States\n"); detecting_states = 1; }
-"Transiciones"  { printf("Found a declaration of Transitions\n"); }
-"Inicial"       { printf("Found a declaration of Initial\n"); detecting_initial = 1;}
-"Finales"       { printf("Found a declaration of Finals\n"); detecting_finals = 1;}
 
-{transition}    { printf("Found a transition\n"); llist_push(transitions, strdup(yytext));}
+"Estados"       { printf("Found a declaration of States\n");
+                  detecting_states = 1; }
+
+"Transiciones"  { printf("Found a declaration of Transitions\n"); }
+
+"Inicial"       { printf("Found a declaration of Initial\n");
+                  detecting_initial = 1;}
+
+"Finales"       { printf("Found a declaration of Finals\n");
+                  detecting_finals = 1;}
+
+{transition}    { printf("Found a transition\n");
+                  llist_push(transitions, strdup(yytext));}
+
 {split}         { printf("Found a separator\n"); }
+
 {number}        { if (detecting_states)
                   {
                     states = strdup(yytext);
@@ -64,14 +74,19 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
                   }
                 }
 
-{SIMBOLO}       { printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));}
+{SIMBOLO}       { printf("Found token 'SIMBOLO'\n");
+                  llist_push(alphabet, strdup(yytext));}
+
 {ABRIR}         { printf("Found token 'ABRIR'\n"); }
+
 {CERRAR}        { printf("Found token 'CERRAR'\n");
                   if (detecting_finals == 1) detecting_finals = 0;
                 }
+
 {COMA}          { printf("Found token 'COMA'\n"); }
 
 .               { printf("<<error:%s>>\n", yytext); }
+
 <<EOF>>         { yyterminate(); }
 
 %%
