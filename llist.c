@@ -113,10 +113,16 @@ void *llist_pop(llist *list)
 void llist_print(llist *list)
 {
     struct node *curr = *list;
+    int i = 0;
     while (curr != NULL) {
         printf(curr->data);
-        printf("\n");
+        printf("\t");
         curr = curr->next;
+        i++;
+        if (i == 4) {
+          printf("\n\n");
+          i = 0;
+        }
     }
     putchar('\n');
 }

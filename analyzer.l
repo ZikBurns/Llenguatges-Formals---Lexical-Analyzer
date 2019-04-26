@@ -62,10 +62,10 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
                   {
                     llist_push(final_states, strdup(yytext));
                   }
-				  else if ((*(strdup(yytext))>='0')&&(*(strdup(yytext))<='9'))
-				  {
-					printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));
-				  }
+        				  else if ((*(strdup(yytext))>='0')&&(*(strdup(yytext))<='9'))
+        				  {
+        					printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));
+        				  }
                 }
 
 {SIMBOLO}       { printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));}
@@ -96,7 +96,8 @@ int main(int argc, char const *argv[])
     final_states = llist_create(NULL);
 
     yylex();
-    printf("\n=======================================\nLexical recognition finished\n\nNumber of states = %s\
+    printf("\n================================================================================\
+    \nLexical recognition finished\n\nNumber of states = %s\
     \n\nTransitions:\n\n", states);
     llist_print(transitions);
     printf("\nAlphabet:\n\n");
@@ -104,8 +105,7 @@ int main(int argc, char const *argv[])
     printf("\nInitial state = %s\n\n", initial_state);
     printf("\nFinal states:\n\n");
     llist_print(final_states);
-    printf("=======================================\n");
-
+    printf("================================================================================\n");
 
     llist_free(alphabet);
     llist_free(transitions);
