@@ -4,7 +4,7 @@ out : lex.yy.c llist.o
 lex.yy.c :
 	flex AF.l
 
-llist.o : llist.c
+llist.o : 
 	gcc -c -o llist.o llist.c
 
 clean :
