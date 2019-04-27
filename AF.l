@@ -43,8 +43,8 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
 "Alfabeto"      { printf("Found an Alphabet declaration\n"); }
 "Estados"       { printf("Found a declaration of States\n"); detecting_states = 1; }
 "Transiciones"  { printf("Found a declaration of Transitions\n"); }
-"Inicial"       { printf("Found a declaration of Initial\n"); detecting_initial = 1;}
-"Finales"       { printf("Found a declaration of Finals\n"); detecting_finals = 1;}
+"Inicial"       { printf("Found a declaration of Initial state\n"); detecting_initial = 1;}
+"Finales"       { printf("Found a declaration of Final states\n"); detecting_finals = 1;}
 
 {transition}    { printf("Found a transition\n"); llist_push(transitions, strdup(yytext));}
 {split}         { printf("Found a separator\n"); }
@@ -71,7 +71,7 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
 {SIMBOLO}       { printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));}
 {ABRIR}         { printf("Found token 'ABRIR'\n"); }
 {CERRAR}        { printf("Found token 'CERRAR'\n");
-                  if (detecting_finals == 1) detecting_finals = 0;
+                  if (detecting_finals) detecting_finals = 0;
                 }
 {COMA}          { printf("Found token 'COMA'\n"); }
 
