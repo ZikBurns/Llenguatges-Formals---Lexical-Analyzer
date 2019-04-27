@@ -62,7 +62,7 @@ void llist_print(llist *list)
     struct node *curr = *list;
     int i = 0;
     while (curr != NULL) {
-        printf(curr->data);
+        printf("%s", (char *)curr->data);
         printf("\t");
         curr = curr->next;
         i++;
