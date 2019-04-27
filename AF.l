@@ -34,10 +34,10 @@ newline         [\n\r]
 split           [ \t]*
 num             0|[1-9][0-9]*
 transition      \({split}{num}{split}\,{split}{SIMBOLO}{split}\;{split}{num}{split}\)
-alfabeto	      [Aa][Ll][Ff][Aa][Bb][Ee][Tt][Oo]
-estados		      [Ee][Ss][Tt][Aa][Dd][Oo][Ss]
-transiciones	  [Tt][Rr][Aa][Nn][Ss][Ii][Cc][Ii][Oo][Nn][Ee][Ss]
-inicial		      [Ii][Nn][Ii][Cc][Ii][Aa][Ll]
+alfabeto	    [Aa][Ll][Ff][Aa][Bb][Ee][Tt][Oo]
+estados		    [Ee][Ss][Tt][Aa][Dd][Oo][Ss]
+transiciones	[Tt][Rr][Aa][Nn][Ss][Ii][Cc][Ii][Oo][Nn][Ee][Ss]
+inicial		    [Ii][Nn][Ii][Cc][Ii][Aa][Ll]
 final           [Ff][Ii][Nn][Aa][Ll][Ee][Ss]
 
 %%
