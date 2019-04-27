@@ -23,6 +23,7 @@
     llist *transitions;
     llist *final_states;
     char * initial_state;
+	int errors=0;
 
 %}
 
@@ -80,7 +81,7 @@ final           [Ff][Ii][Nn][Aa][Ll][Ee][Ss]
                 }
 {COMA}          { printf("Found token 'COMA'\n"); }
 
-.               { printf("<<error:%s>>\n", yytext); }
+.               { printf("<<error:%s>>\n", yytext); errors=errors+1;}
 <<EOF>>         { yyterminate(); }
 
 %%
@@ -116,4 +117,5 @@ int main(int argc, char const *argv[])
     llist_free(alphabet);
     llist_free(transitions);
     llist_free(final_states);
+	printf("Errors found: %i",errors);
 }
