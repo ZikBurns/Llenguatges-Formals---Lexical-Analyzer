@@ -1,0 +1,6 @@
+% Autómata Finito
+AlFaBeTo  { A, B, C, d, e, f, 1, 2, 3   , 4  , 5 	, 6}
+eStAdoS { 32 }
+TraNsIciOneS { (23 , A ; 31) ,	(0 , 5 ; 23), (31 , b ; 1)	,(0 , b ; 22) }
+InIciAL { 0 }
+FINaLEs { 32, 22, 30, 1, 2 }

@@ -26,7 +26,7 @@
 
 %}
 
-SIMBOLO         [a-zA-Z0-9]+
+SIMBOLO         [a-zA-Z0-9]
 ABRIR           "{"
 CERRAR          "}"
 COMA            ","

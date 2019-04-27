@@ -1,0 +1,6 @@
+% Autómata Finito
+Alfabeto  { a, b, c, d, e, f, 1, 2, 3   , 4  , 5 	, 6}
+Estados { 32 }
+Transiciones { (23 , a ; 31) ,	(0 , 5 ; 23), (31 , 6 ; 1) }
+Inicial { 0 }
+Finales { 32, 22, 30, 1, 2 }
