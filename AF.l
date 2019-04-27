@@ -32,8 +32,8 @@ CERRAR          "}"
 COMA            ","
 newline         [\n\r]
 split           [ \t]*
-number          0|[1-9][0-9]*
-transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{number}{split}\)
+num          0|[1-9][0-9]*
+transition      \({split}{num}{split}\,{split}{SIMBOLO}{split}\;{split}{num}{split}\)
 alfabeto	      [Aa][Ll][Ff][Aa][Bb][Ee][Tt][Oo]
 estados		      [Ee][Ss][Tt][Aa][Dd][Oo][Ss]
 transiciones	  [Tt][Rr][Aa][Nn][Ss][Ii][Cc][Ii][Oo][Nn][Ee][Ss]
@@ -53,7 +53,7 @@ final           [Ff][Ii][Nn][Aa][Ll][Ee][Ss]
 {transition}    { printf("Found a transition\n"); llist_push(transitions, strdup(yytext));}
 {split}         { printf("Found a separator\n"); }
 {newline}       { printf("Found a new line\n");}
-{number}        { if (detecting_states)
+{num}        { if (detecting_states)
                   {
                     states = strdup(yytext);
                     detecting_states = 0;
