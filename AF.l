@@ -53,7 +53,7 @@ final           [Ff][Ii][Nn][Aa][Ll][Ee][Ss]
 {transition}    { printf("Found a transition\n"); llist_push(transitions, strdup(yytext));}
 {split}         { printf("Found a separator\n"); }
 {newline}       { printf("Found a new line\n");}
-{num}        { if (detecting_states)
+{num}           { if (detecting_states)
                   {
                     states = strdup(yytext);
                     detecting_states = 0;
