@@ -32,7 +32,7 @@ CERRAR          "}"
 COMA            ","
 newline         [\n\r]
 split           [ \t]*
-num          0|[1-9][0-9]*
+num             0|[1-9][0-9]*
 transition      \({split}{num}{split}\,{split}{SIMBOLO}{split}\;{split}{num}{split}\)
 alfabeto	      [Aa][Ll][Ff][Aa][Bb][Ee][Tt][Oo]
 estados		      [Ee][Ss][Tt][Aa][Dd][Oo][Ss]
