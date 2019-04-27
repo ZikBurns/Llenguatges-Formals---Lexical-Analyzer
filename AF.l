@@ -9,8 +9,6 @@
 * Version 1.0
 **/
 
-%option caseless
-
 %{
     #include <stdio.h>
     #include <stddef.h>
@@ -32,22 +30,29 @@ SIMBOLO         [a-zA-Z0-9]+
 ABRIR           "{"
 CERRAR          "}"
 COMA            ","
-split           [ \n\t\r]*
+newline         [\n\r]
+split           [ \t]*
 number          0|[1-9][0-9]*
 transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{number}{split}\)
+alfabeto	      [Aa][Ll][Ff][Aa][Bb][Ee][Tt][Oo]
+estados		      [Ee][Ss][Tt][Aa][Dd][Oo][Ss]
+transiciones	  [Tt][Rr][Aa][Nn][Ss][Ii][Cc][Ii][Oo][Nn][Ee][Ss]
+inicial		      [Ii][Nn][Ii][Cc][Ii][Aa][Ll]
+final           [Ff][Ii][Nn][Aa][Ll][Ee][Ss]
 
 %%
 
-"%".*\n         { printf("Found a comment\n"); }
+"%".*{newline}        { printf("Found a comment\n"); }
 
-"Alfabeto"      { printf("Found an Alphabet declaration\n"); }
-"Estados"       { printf("Found a declaration of States\n"); detecting_states = 1; }
-"Transiciones"  { printf("Found a declaration of Transitions\n"); }
-"Inicial"       { printf("Found a declaration of Initial state\n"); detecting_initial = 1;}
-"Finales"       { printf("Found a declaration of Final states\n"); detecting_finals = 1;}
+{alfabeto}      { printf("Found an Alphabet declaration\n"); }
+{estados}       { printf("Found a declaration of States\n"); detecting_states = 1; }
+{transiciones}  { printf("Found a declaration of Transitions\n"); }
+{inicial}       { printf("Found a declaration of Initial state\n"); detecting_initial = 1;}
+{final}         { printf("Found a declaration of Final states\n"); detecting_finals = 1;}
 
 {transition}    { printf("Found a transition\n"); llist_push(transitions, strdup(yytext));}
 {split}         { printf("Found a separator\n"); }
+{newline}       { printf("Found a new line\n");}
 {number}        { if (detecting_states)
                   {
                     states = strdup(yytext);
@@ -62,10 +67,10 @@ transition      \({split}{number}{split}\,{split}{SIMBOLO}{split}\;{split}{numbe
                   {
                     llist_push(final_states, strdup(yytext));
                   }
-        				  else if ((*(strdup(yytext))>='0')&&(*(strdup(yytext))<='9'))
-        				  {
-        					printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));
-        				  }
+          				  else if ((*(strdup(yytext))>='0')&&(*(strdup(yytext))<='9'))
+          				  {
+          					printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));
+          				  }
                 }
 
 {SIMBOLO}       { printf("Found token 'SIMBOLO'\n"); llist_push(alphabet, strdup(yytext));}
